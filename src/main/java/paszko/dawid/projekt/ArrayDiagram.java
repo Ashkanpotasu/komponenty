@@ -269,7 +269,11 @@ public class ArrayDiagram extends JComponent {
                     if (w > size) {
                         w = size;
                     }
-                    Rectangle r = new Rectangle(clientRect.x + (int) x, clientRect.y + height - h, (int)(w - x), h);
+                    int width = (int) (w - x);
+                    if (width < 1) {
+                        width = 1;
+                    }
+                    Rectangle r = new Rectangle(clientRect.x + (int) x, clientRect.y + height - h, width, h);
                     g2.fill(r);
                     x += this.lineSpacing + pointWidth;
                     n += m;
@@ -330,7 +334,7 @@ public class ArrayDiagram extends JComponent {
                 this.data = Arrays.stream((int[]) data).asDoubleStream().toArray();
             }
             this.repaint();
-            System.out.printf("%d%n", this.data.length);
+            //System.out.printf("%d%n", this.data.length);
         } else {
             throw new InvalidTypeException("Only int[] and double[] are supported");
         }

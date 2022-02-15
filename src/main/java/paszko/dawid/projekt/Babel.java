@@ -34,7 +34,7 @@ public class Babel { //2000 190 180 170 160 150 140 130 120 110 100 90 80 70 60 
                 e.printStackTrace();
             }
             try {
-                Thread.sleep(50);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
