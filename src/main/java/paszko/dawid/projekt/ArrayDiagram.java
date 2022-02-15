@@ -334,7 +334,6 @@ public class ArrayDiagram extends JComponent {
                 this.data = Arrays.stream((int[]) data).asDoubleStream().toArray();
             }
             this.repaint();
-            //System.out.printf("%d%n", this.data.length);
         } else {
             throw new InvalidTypeException("Only int[] and double[] are supported");
         }

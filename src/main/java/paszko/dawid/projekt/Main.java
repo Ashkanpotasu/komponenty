@@ -1,6 +1,7 @@
 package paszko.dawid.projekt;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class Main {
@@ -17,5 +18,7 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.setMinimumSize(new Dimension(1385, 400));
+        frame.setPreferredSize(new Dimension(1385, 400));
     }
 }

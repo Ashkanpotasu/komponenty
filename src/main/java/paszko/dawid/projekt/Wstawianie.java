@@ -2,8 +2,10 @@ package paszko.dawid.projekt;
 
 import javax.swing.*;
 
-public class Wstawianie {
+public class Wstawianie implements Runnable, Sortowania {
     private ArrayDiagram diagram;
+    public int[] data;
+    private Finished finished;
 
     public void wstaw(int tab[]) {
         int klucz, a;
@@ -25,15 +27,41 @@ public class Wstawianie {
                     }
                 }
             });
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if(finished!=null) {
+            finished.finish(this);
         }
     }
+
+
 
 
     public static void main(String[] args) {
 
     }
 
+    @Override
     public void setDiagram(ArrayDiagram diagram) {
         this.diagram = diagram;
+    }
+
+    @Override
+    public void setData(int[] data) {
+        this.data = data;
+    }
+
+    @Override
+    public void setFinished(Finished finished) {
+        this.finished = finished;
+    }
+
+    @Override
+    public void run() {
+        wstaw(data);
     }
 }

@@ -3,8 +3,11 @@ package paszko.dawid.projekt;
 import javax.swing.*;
 import java.util.Scanner;
 
-public class Qsort {
+public class Qsort implements Runnable, Sortowania {
     private ArrayDiagram diagram;
+    public int[] data;
+    private Finished finished;
+    private boolean zrobione = false;
 
     public void quicksort(int tab[], int poczatek, int koniec) {
         if(poczatek<koniec) {
@@ -12,6 +15,12 @@ public class Qsort {
 
             quicksort(tab, poczatek, indeks-1);
             quicksort(tab, indeks+1, koniec);
+        }
+        else {
+            if(!zrobione) {
+                finished.finish(this);
+                zrobione = true;
+            }
         }
     }
     public int dziel(int tab[], int poczatek, int koniec) {
@@ -35,6 +44,11 @@ public class Qsort {
                     }
                 }
             });
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         temp = tab[a+1];
         tab[a+1] = tab[koniec];
@@ -57,7 +71,23 @@ public class Qsort {
         quicksort(tab, 0, tab.length-1);*/
     }
 
+    @Override
     public void setDiagram(ArrayDiagram diagram) {
         this.diagram = diagram;
+    }
+
+    @Override
+    public void setData(int[] data) {
+        this.data = data;
+    }
+
+    @Override
+    public void setFinished(Finished finished) {
+        this.finished = finished;
+    }
+
+    @Override
+    public void run() {
+        quicksort(data, 0, data.length-1);
     }
 }

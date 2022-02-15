@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Random;
 
 public class MainFrame extends JFrame {
@@ -22,6 +21,10 @@ public class MainFrame extends JFrame {
     private JButton wyczyscButton;
     private JPanel diagramPanel;
     private JButton losujButton;
+    private JButton shellButton;
+    private JButton shakerButton;
+    private JButton wyborButton;
+    private JButton zliczButton;
     private ArrayDiagram diagram;
 
     private int wybor=0;
@@ -36,6 +39,8 @@ public class MainFrame extends JFrame {
         diagram = new ArrayDiagram();
         diagramPanel.setLayout(new BorderLayout());
         diagramPanel.add(diagram, BorderLayout.CENTER);
+        diagramPanel.setPreferredSize(new Dimension(100, 100));
+        diagramPanel.setMinimumSize(new Dimension(100, 100));
         this.pack();
 
 
@@ -55,6 +60,30 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 wybor = 3;
+            }
+        });
+        shellButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                wybor = 4;
+            }
+        });
+        shakerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                wybor = 5;
+            }
+        });
+        wyborButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                wybor = 6;
+            }
+        });
+        zliczButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                wybor = 7;
             }
         });
 
@@ -102,31 +131,77 @@ public class MainFrame extends JFrame {
             jesttab = true;
         }
         boolean tak = false;
-        long start=0, stop=0;
+        final long start = System.currentTimeMillis();
         if(jesttab) {
+            Finished finished = new Finished() {
+                @Override
+                public void finish(Sortowania source) {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            long stop = System.currentTimeMillis();
+                            wynikArea.append(" Obliczone w " + (stop-start) + " milisekund.\n");
+                        }
+                    });
+                }
+            };
+
             switch (wyb) {
                 case 1:
-                    start = System.currentTimeMillis();
                     Babel babel = new Babel();
                     babel.setDiagram(diagram);
-                    babel.sortuj(tab);
-                    stop = System.currentTimeMillis();
+                    babel.setData(tab);
+                    babel.setFinished(finished);
+                    new Thread(babel).start();
                     tak = true;
                     break;
                 case 2:
-                    start = System.currentTimeMillis();
                     Qsort qsort = new Qsort();
                     qsort.setDiagram(diagram);
-                    qsort.quicksort(tab, 0, tab.length - 1);
-                    stop = System.currentTimeMillis();
+                    qsort.setData(tab);
+                    qsort.setFinished(finished);
+                    new Thread(qsort).start();
                     tak = true;
                     break;
                 case 3:
-                    start = System.currentTimeMillis();
                     Wstawianie wstawianie = new Wstawianie();
                     wstawianie.setDiagram(diagram);
-                    wstawianie.wstaw(tab);
-                    stop = System.currentTimeMillis();
+                    wstawianie.setData(tab);
+                    wstawianie.setFinished(finished);
+                    new Thread(wstawianie).start();
+                    tak = true;
+                    break;
+                case 4:
+                    Shell shell = new Shell();
+                    shell.setDiagram(diagram);
+                    shell.setData(tab);
+                    shell.setFinished(finished);
+                    new Thread(shell).start();
+                    tak = true;
+                    break;
+                case 5:
+                    Shaker shaker = new Shaker();
+                    shaker.setDiagram(diagram);
+                    shaker.setData(tab);
+                    shaker.setFinished(finished);
+                    //shaker.run();
+                    new Thread(shaker).start();
+                    tak = true;
+                    break;
+                case 6:
+                    Wybor wybor = new Wybor();
+                    wybor.setDiagram(diagram);
+                    wybor.setData(tab);
+                    wybor.setFinished(finished);
+                    new Thread(wybor).start();
+                    tak = true;
+                    break;
+                case 7:
+                    Zliczanie zliczanie = new Zliczanie();
+                    zliczanie.setDiagram(diagram);
+                    zliczanie.setData(tab);
+                    zliczanie.setFinished(finished);
+                    new Thread(zliczanie).start();
                     tak = true;
                     break;
                 default:
@@ -141,7 +216,7 @@ public class MainFrame extends JFrame {
         if(tak) {
             for(int i=0; i<tab.length; i++) {
                 if(i==tab.length-1)
-                    wynikArea.append(tab[i] + ". Obliczone w " + (stop-start) + " milisekund.\n");
+                    wynikArea.append(tab[i] + ".");
                 else
                     wynikArea.append(tab[i] + ", ");
             }
