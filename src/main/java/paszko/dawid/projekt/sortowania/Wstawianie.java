@@ -1,24 +1,25 @@
-package paszko.dawid.projekt;
+package paszko.dawid.projekt.sortowania;
+
+import paszko.dawid.projekt.ArrayDiagram;
 
 import javax.swing.*;
 
-public class Wybor implements Runnable, Sortowania {
+public class Wstawianie implements Runnable, Sortowanie {
     private ArrayDiagram diagram;
     public int[] data;
     private Finished finished;
+    private JTextArea wynikArea;
 
-    public void sortuj(int[] tab) {
-        int a, temp;
-
-        for(int i=0; i<tab.length-1; i++) {
+    public void wstaw(int tab[]) {
+        int klucz, a;
+        for(int i=1; i<tab.length; i++) {
             a=i;
-            for(int j=i+1; j<tab.length; j++) {
-                if(tab[j]<tab[a])
-                    a=j;
-                temp = tab[a];
-                tab[a] = tab[i];
-                tab[i] = temp;
+            klucz = tab[i];
+            while(a>0 && tab[a-1]>klucz) {
+                tab[a] = tab[a-1];
+                a--;
             }
+            tab[a] = klucz;
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -36,15 +37,22 @@ public class Wybor implements Runnable, Sortowania {
             }
         }
         if(finished!=null) {
+            for (int i = 0; i < tab.length; i++) {
+                if(i==tab.length-1)
+                    wynikArea.append(tab[i] + ".");
+                else
+                    wynikArea.append(tab[i] + ", ");
+            }
             finished.finish(this);
         }
     }
 
 
+
+
     public static void main(String[] args) {
 
     }
-
 
     @Override
     public void setDiagram(ArrayDiagram diagram) {
@@ -57,12 +65,13 @@ public class Wybor implements Runnable, Sortowania {
     }
 
     @Override
-    public void setFinished(Finished finished) {
+    public void setFinished(Finished finished, JTextArea wynikArea) {
         this.finished = finished;
+        this.wynikArea = wynikArea;
     }
 
     @Override
     public void run() {
-        sortuj(data);
+        wstaw(data);
     }
 }

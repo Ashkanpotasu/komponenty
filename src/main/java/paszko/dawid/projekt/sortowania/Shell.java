@@ -1,11 +1,14 @@
-package paszko.dawid.projekt;
+package paszko.dawid.projekt.sortowania;
+
+import paszko.dawid.projekt.ArrayDiagram;
 
 import javax.swing.*;
 
-public class Shell implements Runnable, Sortowania {
+public class Shell implements Runnable, Sortowanie {
     private ArrayDiagram diagram;
     public int[] data;
     private Finished finished;
+    private JTextArea wynikArea;
 
     public void sortuj(int[] tab) {
         int dlugosc = tab.length;
@@ -38,6 +41,12 @@ public class Shell implements Runnable, Sortowania {
             }
         }
         if(finished!=null) {
+            for (int i = 0; i < tab.length; i++) {
+                if(i==tab.length-1)
+                    wynikArea.append(tab[i] + ".");
+                else
+                    wynikArea.append(tab[i] + ", ");
+            }
             finished.finish(this);
         }
     }
@@ -59,8 +68,9 @@ public class Shell implements Runnable, Sortowania {
     }
 
     @Override
-    public void setFinished(Finished finished) {
+    public void setFinished(Finished finished, JTextArea wynikArea) {
         this.finished = finished;
+        this.wynikArea = wynikArea;
     }
 
     @Override

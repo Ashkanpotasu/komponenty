@@ -1,5 +1,7 @@
 package paszko.dawid.projekt;
 
+import paszko.dawid.projekt.sortowania.*;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -130,12 +132,12 @@ public class MainFrame extends JFrame {
             }
             jesttab = true;
         }
-        boolean tak = false;
+        //boolean tak = false;
         final long start = System.currentTimeMillis();
         if(jesttab) {
             Finished finished = new Finished() {
                 @Override
-                public void finish(Sortowania source) {
+                public void finish(Sortowanie source) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -151,58 +153,57 @@ public class MainFrame extends JFrame {
                     Babel babel = new Babel();
                     babel.setDiagram(diagram);
                     babel.setData(tab);
-                    babel.setFinished(finished);
+                    babel.setFinished(finished, wynikArea);
                     new Thread(babel).start();
-                    tak = true;
+                    //tak = true;
                     break;
                 case 2:
                     Qsort qsort = new Qsort();
                     qsort.setDiagram(diagram);
                     qsort.setData(tab);
-                    qsort.setFinished(finished);
+                    qsort.setFinished(finished, wynikArea);
                     new Thread(qsort).start();
-                    tak = true;
+                    //tak = true;
                     break;
                 case 3:
                     Wstawianie wstawianie = new Wstawianie();
                     wstawianie.setDiagram(diagram);
                     wstawianie.setData(tab);
-                    wstawianie.setFinished(finished);
+                    wstawianie.setFinished(finished, wynikArea);
                     new Thread(wstawianie).start();
-                    tak = true;
+                    //tak = true;
                     break;
                 case 4:
                     Shell shell = new Shell();
                     shell.setDiagram(diagram);
                     shell.setData(tab);
-                    shell.setFinished(finished);
+                    shell.setFinished(finished, wynikArea);
                     new Thread(shell).start();
-                    tak = true;
+                    //tak = true;
                     break;
                 case 5:
                     Shaker shaker = new Shaker();
                     shaker.setDiagram(diagram);
                     shaker.setData(tab);
-                    shaker.setFinished(finished);
-                    //shaker.run();
+                    shaker.setFinished(finished, wynikArea);
                     new Thread(shaker).start();
-                    tak = true;
+                    //tak = true;
                     break;
                 case 6:
                     Wybor wybor = new Wybor();
                     wybor.setDiagram(diagram);
                     wybor.setData(tab);
-                    wybor.setFinished(finished);
+                    wybor.setFinished(finished, wynikArea);
                     new Thread(wybor).start();
-                    tak = true;
+                    //tak = true;
                     break;
                 case 7:
                     Zliczanie zliczanie = new Zliczanie();
                     zliczanie.setDiagram(diagram);
                     zliczanie.setData(tab);
-                    zliczanie.setFinished(finished);
+                    zliczanie.setFinished(finished, wynikArea);
                     new Thread(zliczanie).start();
-                    tak = true;
+                    //tak = true;
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Wybierz algorytm sortujący!", "Nie wybrano sortowania", JOptionPane.ERROR_MESSAGE);
@@ -213,13 +214,13 @@ public class MainFrame extends JFrame {
             JOptionPane.showMessageDialog(null, "Wpisz liczby do posortowania!", "Nie wpisano liczb", JOptionPane.ERROR_MESSAGE);
         }
 
-        if(tak) {
+        /*if(tak) {
             for(int i=0; i<tab.length; i++) {
                 if(i==tab.length-1)
                     wynikArea.append(tab[i] + ".");
                 else
                     wynikArea.append(tab[i] + ", ");
             }
-        }
+        }*/
     }
 }

@@ -1,38 +1,26 @@
-package paszko.dawid.projekt;
+package paszko.dawid.projekt.sortowania;
+
+import paszko.dawid.projekt.ArrayDiagram;
 
 import javax.swing.*;
-import java.util.Scanner;
 
-public class Qsort implements Runnable, Sortowania {
+public class Babel implements Runnable, Sortowanie {
     private ArrayDiagram diagram;
     public int[] data;
     private Finished finished;
-    private boolean zrobione = false;
+    private JTextArea wynikArea;
 
-    public void quicksort(int tab[], int poczatek, int koniec) {
-        if(poczatek<koniec) {
-            int indeks = dziel(tab, poczatek, koniec);
-
-            quicksort(tab, poczatek, indeks-1);
-            quicksort(tab, indeks+1, koniec);
-        }
-        else {
-            if(!zrobione) {
-                finished.finish(this);
-                zrobione = true;
-            }
-        }
-    }
-    public int dziel(int tab[], int poczatek, int koniec) {
-        int piwot = tab[koniec];
-        int a=(poczatek-1);
-        int temp;
-        for(int i=poczatek; i<koniec; i++) {
-            if(tab[i]<=piwot) {
-                a++;
-                temp = tab[a];
-                tab[a] = tab[i];
-                tab[i] = temp;
+    public void sortuj(int tab[]) {
+        int temp, a = 1;
+        while(a>0) {
+            a = 0;
+            for (int i = 0; i < tab.length - 1; i++) {
+                if (tab[i] > tab[i + 1]) {
+                    temp = tab[i + 1];
+                    tab[i + 1] = tab[i];
+                    tab[i] = temp;
+                    a++;
+                }
             }
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
@@ -50,13 +38,16 @@ public class Qsort implements Runnable, Sortowania {
                 e.printStackTrace();
             }
         }
-        temp = tab[a+1];
-        tab[a+1] = tab[koniec];
-        tab[koniec] = temp;
-
-        return a+1;
+        if(finished!=null) {
+            for (int i = 0; i < tab.length; i++) {
+                if(i==tab.length-1)
+                    wynikArea.append(tab[i] + ".");
+                else
+                    wynikArea.append(tab[i] + ", ");
+            }
+            finished.finish(this);
+        }
     }
-
 
     public static void main(String[] args) {
         /*Scanner in = new Scanner(System.in);
@@ -68,7 +59,7 @@ public class Qsort implements Runnable, Sortowania {
         for(int i=0; i<ilosc; i++) {
             tab[i] = in.nextInt();
         }
-        quicksort(tab, 0, tab.length-1);*/
+        sortuj(tab);*/
     }
 
     @Override
@@ -82,12 +73,13 @@ public class Qsort implements Runnable, Sortowania {
     }
 
     @Override
-    public void setFinished(Finished finished) {
+    public void setFinished(Finished finished, JTextArea wynikArea) {
         this.finished = finished;
+        this.wynikArea = wynikArea;
     }
 
     @Override
     public void run() {
-        quicksort(data, 0, data.length-1);
+        sortuj(data);
     }
 }
