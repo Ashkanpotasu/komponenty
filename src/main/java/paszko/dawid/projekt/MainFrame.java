@@ -122,7 +122,7 @@ public class MainFrame extends JFrame {
 
     private void wykonaj(int wyb) {
         int[] tab = new int[0];
-        boolean jesttab = false;
+        boolean jestTab = false;
         if(liczbyArea.getText().length()!=0) {
             String liczby = liczbyArea.getText().toString();
             String[] licz = liczby.split(" ");
@@ -130,11 +130,10 @@ public class MainFrame extends JFrame {
             for (int i = 0; i < tab.length; i++) {
                 tab[i] = Integer.parseInt(licz[i]);
             }
-            jesttab = true;
+            jestTab = true;
         }
-        //boolean tak = false;
         final long start = System.currentTimeMillis();
-        if(jesttab) {
+        if(jestTab) {
             Finished finished = new Finished() {
                 @Override
                 public void finish(Sortowanie source) {
@@ -155,15 +154,14 @@ public class MainFrame extends JFrame {
                     babel.setData(tab);
                     babel.setFinished(finished, wynikArea);
                     new Thread(babel).start();
-                    //tak = true;
                     break;
                 case 2:
                     Qsort qsort = new Qsort();
                     qsort.setDiagram(diagram);
                     qsort.setData(tab);
                     qsort.setFinished(finished, wynikArea);
+                    //qsort.wynik(tab);
                     new Thread(qsort).start();
-                    //tak = true;
                     break;
                 case 3:
                     Wstawianie wstawianie = new Wstawianie();
@@ -171,7 +169,6 @@ public class MainFrame extends JFrame {
                     wstawianie.setData(tab);
                     wstawianie.setFinished(finished, wynikArea);
                     new Thread(wstawianie).start();
-                    //tak = true;
                     break;
                 case 4:
                     Shell shell = new Shell();
@@ -179,7 +176,6 @@ public class MainFrame extends JFrame {
                     shell.setData(tab);
                     shell.setFinished(finished, wynikArea);
                     new Thread(shell).start();
-                    //tak = true;
                     break;
                 case 5:
                     Shaker shaker = new Shaker();
@@ -187,7 +183,6 @@ public class MainFrame extends JFrame {
                     shaker.setData(tab);
                     shaker.setFinished(finished, wynikArea);
                     new Thread(shaker).start();
-                    //tak = true;
                     break;
                 case 6:
                     Wybor wybor = new Wybor();
@@ -195,7 +190,6 @@ public class MainFrame extends JFrame {
                     wybor.setData(tab);
                     wybor.setFinished(finished, wynikArea);
                     new Thread(wybor).start();
-                    //tak = true;
                     break;
                 case 7:
                     Zliczanie zliczanie = new Zliczanie();
@@ -203,7 +197,6 @@ public class MainFrame extends JFrame {
                     zliczanie.setData(tab);
                     zliczanie.setFinished(finished, wynikArea);
                     new Thread(zliczanie).start();
-                    //tak = true;
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Wybierz algorytm sortujący!", "Nie wybrano sortowania", JOptionPane.ERROR_MESSAGE);
@@ -213,14 +206,5 @@ public class MainFrame extends JFrame {
         else {
             JOptionPane.showMessageDialog(null, "Wpisz liczby do posortowania!", "Nie wpisano liczb", JOptionPane.ERROR_MESSAGE);
         }
-
-        /*if(tak) {
-            for(int i=0; i<tab.length; i++) {
-                if(i==tab.length-1)
-                    wynikArea.append(tab[i] + ".");
-                else
-                    wynikArea.append(tab[i] + ", ");
-            }
-        }*/
     }
 }

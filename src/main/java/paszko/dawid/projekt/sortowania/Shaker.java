@@ -21,21 +21,22 @@ public class Shaker implements Runnable, Sortowanie {
                     tab[j+1] = temp;
                     swapped = true;
                 }
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            diagram.setData(tab);
-                        } catch (ArrayDiagram.InvalidTypeException e) {
-                            e.printStackTrace();
-                        }
+
+            }
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        diagram.setData(tab);
+                    } catch (ArrayDiagram.InvalidTypeException e) {
+                        e.printStackTrace();
                     }
-                });
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+            });
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             for(int j = tab.length-2-i; j>i; j--) {
                 if(tab[j]>tab[j-1]) {
@@ -44,21 +45,21 @@ public class Shaker implements Runnable, Sortowanie {
                     tab[j-1] = temp;
                     swapped = true;
                 }
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            diagram.setData(tab);
-                        } catch (ArrayDiagram.InvalidTypeException e) {
-                            e.printStackTrace();
-                        }
+            }
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        diagram.setData(tab);
+                    } catch (ArrayDiagram.InvalidTypeException e) {
+                        e.printStackTrace();
                     }
-                });
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+            });
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             if(!swapped)
                 break;

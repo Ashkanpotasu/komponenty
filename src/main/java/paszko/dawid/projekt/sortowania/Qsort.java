@@ -12,23 +12,17 @@ public class Qsort implements Runnable, Sortowanie {
     private boolean zrobione = false;
 
     public void quicksort(int tab[], int poczatek, int koniec) {
-        if(poczatek<koniec) {
+        if(poczatek<koniec)  {
             int indeks = dziel(tab, poczatek, koniec);
 
             quicksort(tab, poczatek, indeks-1);
             quicksort(tab, indeks+1, koniec);
         }
         else {
-            if(!zrobione) {
-                for (int i = 0; i < tab.length; i++) {
-                    if(i==tab.length-1)
-                        wynikArea.append(tab[i] + ".");
-                    else
-                        wynikArea.append(tab[i] + ", ");
-                }
+            if(finished!=null) {
                 finished.finish(this);
-                zrobione = true;
             }
+            zrobione = true;
         }
     }
     public int dziel(int tab[], int poczatek, int koniec) {
@@ -98,5 +92,14 @@ public class Qsort implements Runnable, Sortowanie {
     @Override
     public void run() {
         quicksort(data, 0, data.length-1);
+    }
+
+    public void wynik(int[] tab) {
+        for (int i = 0; i < tab.length; i++) {
+            if(i==tab.length-1)
+                wynikArea.append(tab[i] + ".");
+            else
+                wynikArea.append(tab[i] + ", ");
+        }
     }
 }
