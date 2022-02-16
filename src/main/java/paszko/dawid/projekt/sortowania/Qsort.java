@@ -48,7 +48,7 @@ public class Qsort implements Runnable, Sortowanie {
                 }
             });
             try {
-                Thread.sleep(1);
+                Thread.sleep(0, 500000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
