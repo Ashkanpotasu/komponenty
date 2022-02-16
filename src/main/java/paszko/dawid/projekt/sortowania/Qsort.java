@@ -3,6 +3,7 @@ package paszko.dawid.projekt.sortowania;
 import paszko.dawid.projekt.ArrayDiagram;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 public class Qsort implements Runnable, Sortowanie {
     private ArrayDiagram diagram;
@@ -19,7 +20,7 @@ public class Qsort implements Runnable, Sortowanie {
             quicksort(tab, indeks+1, koniec);
         }
         else {
-            if(finished!=null) {
+            if(finished!=null && zrobione) {
                 finished.finish(this);
             }
             zrobione = true;
