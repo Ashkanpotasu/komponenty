@@ -23,19 +23,22 @@ public class MainFrame extends JFrame {
     private JScrollPane liczbyPanel;
     private JButton sortujButton;
     private JButton wyczyscButton;
-    private JPanel diagramPanel;
     private JButton losujButton;
     private JButton shellButton;
     private JButton shakerButton;
     private JButton wyborButton;
     private JButton zliczButton;
+    private JPanel losujPanel;
+    private JButton wyczyscLButton;
     private ArrayDiagram diagram;
+    private JButton[] buttons = {qsortButton, wstawButton, babelButton, shellButton, shakerButton, wyborButton, zliczButton};
 
     private int wybor=0;
 
     public MainFrame() throws IOException {
         super("Program sortujący");
         var panelGlowny = new JPanel();
+        var diagramPanel = new JPanel();
         panelGlowny.setLayout(new BorderLayout());
         panelGlowny.add(contentPanel, BorderLayout.CENTER);
         this.setContentPane(panelGlowny);
@@ -46,11 +49,11 @@ public class MainFrame extends JFrame {
         diagram = new ArrayDiagram();
         diagramPanel.setLayout(new BorderLayout());
         diagramPanel.add(diagram, BorderLayout.CENTER);
-        diagramPanel.setPreferredSize(new Dimension(300, 100));
-        diagramPanel.setMinimumSize(new Dimension(300, 100));
+        diagramPanel.setPreferredSize(new Dimension(500, 100));
+        diagramPanel.setMinimumSize(new Dimension(500, 100));
         contentPanel.remove(diagramPanel);
         panelGlowny.add(diagramPanel, BorderLayout.LINE_END);
-        TitledBorder border=  new TitledBorder(new EtchedBorder(1), "Diagram", TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION);
+        TitledBorder border=  new TitledBorder(new EtchedBorder (EtchedBorder.LOWERED), "Diagram", TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION);
         border.setTitleFont(border.getTitleFont().deriveFont(Font.BOLD));
         diagramPanel.setBorder(border);
         this.pack();
@@ -60,42 +63,49 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 wybor = 1;
+                isFocused(babelButton);
             }
         });
         qsortButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 wybor = 2;
+                isFocused(qsortButton);
             }
         });
         wstawButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 wybor = 3;
+                isFocused(wstawButton);
             }
         });
         shellButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 wybor = 4;
+                isFocused(shellButton);
             }
         });
         shakerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 wybor = 5;
+                isFocused(shakerButton);
             }
         });
         wyborButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 wybor = 6;
+                isFocused(wyborButton);
             }
         });
         zliczButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 wybor = 7;
+                isFocused(zliczButton);
             }
         });
 
@@ -111,6 +121,12 @@ public class MainFrame extends JFrame {
                 wynikArea.setText("");
             }
         });
+        wyczyscLButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                liczbyArea.setText("");
+            }
+        });
 
         losujButton.addActionListener(new ActionListener() {
             @Override
@@ -118,6 +134,14 @@ public class MainFrame extends JFrame {
                 losuj();
             }
         });
+    }
+
+    private void isFocused(JButton button) {
+        button.setBackground(Color.RED);
+        for (JButton btn: buttons) {
+            if(btn!=button)
+                btn.setBackground(Color.WHITE);
+        }
     }
 
     private void losuj() {
