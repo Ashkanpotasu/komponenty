@@ -10,7 +10,7 @@ public class Wybor implements Runnable, Sortowanie {
     private Finished finished;
     private JTextArea wynikArea;
 
-    public void sortuj(int[] tab) { //jakiś błąd tutaj
+    public void sortuj(int[] tab) {
         int a, temp;
 
         for(int i=0; i<tab.length-1; i++) {
@@ -18,6 +18,8 @@ public class Wybor implements Runnable, Sortowanie {
             for(int j=i+1; j<tab.length; j++) {
                 if(tab[j]<tab[a])
                     a=j;
+            }
+            if(a!=i) {
                 temp = tab[a];
                 tab[a] = tab[i];
                 tab[i] = temp;
