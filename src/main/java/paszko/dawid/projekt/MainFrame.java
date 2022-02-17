@@ -33,7 +33,10 @@ public class MainFrame extends JFrame {
 
     public MainFrame() throws IOException {
         super("Program sortujący");
-        this.setContentPane(contentPanel);
+        var panelGlowny = new JPanel();
+        panelGlowny.setLayout(new BorderLayout());
+        panelGlowny.add(contentPanel, BorderLayout.CENTER);
+        this.setContentPane(panelGlowny);
         setMinimumSize(new Dimension(500, 400));
         var ikona_url = Thread.currentThread().getContextClassLoader().getResource("ikona.png");
         var ikona = ImageIO.read(ikona_url);
@@ -41,8 +44,10 @@ public class MainFrame extends JFrame {
         diagram = new ArrayDiagram();
         diagramPanel.setLayout(new BorderLayout());
         diagramPanel.add(diagram, BorderLayout.CENTER);
-        diagramPanel.setPreferredSize(new Dimension(100, 100));
-        diagramPanel.setMinimumSize(new Dimension(100, 100));
+        diagramPanel.setPreferredSize(new Dimension(300, 100));
+        diagramPanel.setMinimumSize(new Dimension(300, 100));
+        contentPanel.remove(diagramPanel);
+        panelGlowny.add(diagramPanel, BorderLayout.LINE_END);
         this.pack();
 
 
@@ -160,7 +165,6 @@ public class MainFrame extends JFrame {
                     qsort.setDiagram(diagram);
                     qsort.setData(tab);
                     qsort.setFinished(finished, wynikArea);
-                    //qsort.wynik(tab);
                     new Thread(qsort).start();
                     break;
                 case 3:
