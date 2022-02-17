@@ -18,7 +18,7 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setMinimumSize(new Dimension(1390, 500));
-        frame.setPreferredSize(new Dimension(1390, 500));
+        frame.setMinimumSize(new Dimension(1675, 500));
+        frame.setPreferredSize(new Dimension(1675, 500));
     }
 }

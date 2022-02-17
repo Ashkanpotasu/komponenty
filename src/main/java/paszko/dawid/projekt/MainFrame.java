@@ -4,6 +4,8 @@ import paszko.dawid.projekt.sortowania.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,6 +50,9 @@ public class MainFrame extends JFrame {
         diagramPanel.setMinimumSize(new Dimension(300, 100));
         contentPanel.remove(diagramPanel);
         panelGlowny.add(diagramPanel, BorderLayout.LINE_END);
+        TitledBorder border=  new TitledBorder(new EtchedBorder(1), "Diagram", TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION);
+        border.setTitleFont(border.getTitleFont().deriveFont(Font.BOLD));
+        diagramPanel.setBorder(border);
         this.pack();
 
 
