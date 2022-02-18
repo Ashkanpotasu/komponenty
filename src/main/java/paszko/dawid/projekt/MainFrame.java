@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,9 +52,8 @@ public class MainFrame extends JFrame {
         diagramPanel.add(diagram, BorderLayout.CENTER);
         diagramPanel.setPreferredSize(new Dimension(500, 100));
         diagramPanel.setMinimumSize(new Dimension(500, 100));
-        contentPanel.remove(diagramPanel);
         panelGlowny.add(diagramPanel, BorderLayout.LINE_END);
-        TitledBorder border=  new TitledBorder(new EtchedBorder (EtchedBorder.LOWERED), "Diagram", TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION);
+        TitledBorder border = new TitledBorder(new EtchedBorder (EtchedBorder.LOWERED), "Diagram", TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION);
         border.setTitleFont(border.getTitleFont().deriveFont(Font.BOLD));
         diagramPanel.setBorder(border);
         this.pack();
