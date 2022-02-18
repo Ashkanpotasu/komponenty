@@ -1,2 +1,1 @@
-# komponenty
-asd
+#Program sortujący
