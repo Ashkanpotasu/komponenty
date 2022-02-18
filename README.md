@@ -10,7 +10,7 @@ Program sortuje wszystkie podane liczby, dzięki różnym algorytmom. Do wyboru 
 - sortowanie przez zliczanie
 - sortowanie przez wybór
 
-W czasie rzeczywistym pokazuje na diagramie podgląd wartości w trakcie sortowania. Po zakończeniu sortowania wyświetlany jest wynik oraz czas, który był potrzebny do posortowania liczb. :signal_strength: :clock1:
+W czasie rzeczywistym pokazuje na diagramie podgląd wartości w trakcie sortowania. Po zakończeniu sortowania wyświetlany jest wynik oraz czas, który był potrzebny do posortowania liczb. :1234: :clock1:
 
 ![okienko programu](plik1.PNG)
 ![okienko programu po sortowaniu](plik2.PNG)
