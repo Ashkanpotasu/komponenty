@@ -1,4 +1,4 @@
-#Program sortujący
+# Program sortujący
 
 ---
 Program sortuje wszystkie podane liczby, dzięki różnym algorytmom. Do wyboru są:
