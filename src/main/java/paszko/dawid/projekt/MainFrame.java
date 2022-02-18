@@ -175,7 +175,7 @@ public class MainFrame extends JFrame {
                         @Override
                         public void run() {
                             long stop = System.currentTimeMillis();
-                            wynikArea.append(" Obliczone w " + (stop-start) + " milisekund.\n");
+                            wynikArea.append(" Obliczono w " + (stop-start) + " milisekund.\n");
                         }
                     });
                 }
